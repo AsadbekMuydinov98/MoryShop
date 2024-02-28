@@ -7,10 +7,15 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const ShoppingCart = () => {
-  const [total, setTotal] = useState<any>(0)
-  const [products, setProducts]= useState<ProductType[]>(
-    JSON.parse(localStorage.getItem('carts') as string) || []
-  )
+  const [total, setTotal] = useState<number>(0)
+  const [products, setProducts] = useState<ProductType[]>([]);
+	useEffect(() => {
+    // Check if window is defined (client-side)
+    if (typeof window !== 'undefined') {
+      const storedCart = JSON.parse(localStorage.getItem('carts') || '[]');
+      setProducts(storedCart);
+    }
+  }, []);
 
   const removeProduct = (id: number)=>{
     const updateCart = products.filter(product=>product.id!==id)
@@ -59,7 +64,7 @@ const ShoppingCart = () => {
 
   useEffect(()=>{
     const total = products.reduce((acc,item)=>{
-      return acc + item.price*item.quantity
+      return acc + Number(item.price)*item.quantity
     },0)
     setTotal(total.toFixed(2))
   }, [products])

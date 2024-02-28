@@ -9,14 +9,8 @@ import { useEffect, useState } from 'react';
 const ShoppingCart = () => {
   const [total, setTotal] = useState<any>(0)
   const [products, setProducts]= useState<ProductType[]>(
-    // JSON.parse(localStorage.getItem('carts') as string) || []
+    JSON.parse(localStorage.getItem('carts') as string) || []
   )
-	useEffect(()=>{
-		if (typeof products == 'undefined') {
-    const storedCart = JSON.parse(localStorage.getItem('carts') || '[]');
-    setProducts(storedCart);
-  }
-	}, [products])
 
   const removeProduct = (id: number)=>{
     const updateCart = products.filter(product=>product.id!==id)

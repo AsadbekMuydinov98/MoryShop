@@ -11,6 +11,9 @@ const ShoppingCart = () => {
   const [products, setProducts]= useState<ProductType[]>(
     // JSON.parse(localStorage.getItem('carts') as string) || []
   )
+	useEffect(()=>{
+		setProducts(JSON.parse(localStorage.getItem('carts') as string) || [])
+	})
 
   const removeProduct = (id: number)=>{
     const updateCart = products.filter(product=>product.id!==id)
@@ -58,10 +61,6 @@ const ShoppingCart = () => {
 	};
 
   useEffect(()=>{
-		if (typeof window !== 'undefined') {
-			const storedCart = JSON.parse(localStorage.getItem('carts') || '[]');
-			setProducts(storedCart);
-		}
     const total = products.reduce((acc,item)=>{
       return acc + item.price*item.quantity
     },0)

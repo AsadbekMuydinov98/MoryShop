@@ -59,7 +59,7 @@ const ShoppingCart = () => {
 
   useEffect(()=>{
     const total = products.reduce((acc,item)=>{
-      return acc + Number(item.price)*item.quantity
+      return acc + item.price*item.quantity
     },0)
     setTotal(total.toFixed(2))
   }, [products])

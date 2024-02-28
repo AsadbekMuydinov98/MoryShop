@@ -7,7 +7,7 @@ const ContactsPage = () => {
 						width='100%'
 						height='100%'
 						className='absolute inset-0'
-						frameborder='0'
+						frameBorder='0'
 						title='map'
 						marginheight='0'
 						marginwidth='0'

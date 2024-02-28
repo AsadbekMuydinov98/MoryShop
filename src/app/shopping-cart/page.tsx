@@ -12,8 +12,11 @@ const ShoppingCart = () => {
     // JSON.parse(localStorage.getItem('carts') as string) || []
   )
 	useEffect(()=>{
-		setProducts(JSON.parse(localStorage.getItem('carts') as string) || [])
-	})
+		if (typeof products == 'undefined') {
+    const storedCart = JSON.parse(localStorage.getItem('carts') || '[]');
+    setProducts(storedCart);
+  }
+	}, [products])
 
   const removeProduct = (id: number)=>{
     const updateCart = products.filter(product=>product.id!==id)
